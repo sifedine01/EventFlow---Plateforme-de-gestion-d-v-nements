@@ -246,26 +246,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <body>
 <div class="all">
     <section class="sec1">
-    <h1>Bienvenue dans votre espace Événements🎉🎊</h1>
-    <p>Bienvenue dans votre espace de gestion d'événements. Un système complet qui vous permet de créer, organiser et suivre tous vos événements professionnels.</p>
+       <h1>Bienvenue dans votre espace Événements🎉🎊</h1>
+       <p>Bienvenue dans votre espace de gestion d'événements. Un système complet qui vous permet de créer, organiser et suivre tous vos événements professionnels.</p>
     </section>
+
     <section class="sec2">
-    <h2>Connexion</h2>
-      <?php if (isset($error)): ?>
+      <h2>Connexion</h2>
+      
+        <?php if (isset($error)): ?>
         <div class="alert alert-danger">
-            <?= $error ?>
+          <?= $error ?>
         </div>
-      <?php endif; ?>
-    <form method="post">
-    <label for="email">Email:</label>
-    <input type="email" name="email" required><br>
-    <label for="password">Mot de passe:</label>
-    <input type="password" name="mot_de_passe" required><br>
-    <div class="chose">
-      <input type="submit" value="Se connecter">
-      <a href="inscription.php">Créer un compte</a>
-    </div>
-    </form>
+        <?php endif; ?>
+        
+      <form method="post">
+       <label for="email">Email:</label>
+       <input type="email" name="email" required><br>
+
+       <label for="password">Mot de passe:</label>
+       <input type="password" name="mot_de_passe" required><br>
+
+       <div class="chose">
+        <input type="submit" value="Se connecter">
+        <a href="inscription.php">Créer un compte</a>
+       </div>
+      </form>
     </section>
 </div>
 </body>
