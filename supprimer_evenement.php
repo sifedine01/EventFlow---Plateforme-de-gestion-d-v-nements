@@ -16,7 +16,6 @@ if ($role === 'admin') {
     $stmt->execute([$id]);
     header("Location: dashboard_admin.php");
 } else {
-    // Vérifie que l'utilisateur est bien le propriétaire
     $stmt = $pdo->prepare("SELECT * FROM evenements WHERE id = ? AND utilisateur_id = ?");
     $stmt->execute([$id, $user_id]);
     $event = $stmt->fetch();

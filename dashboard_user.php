@@ -141,11 +141,16 @@ $utilisateurs = $stmt->fetch();
         .all {
             padding: 30px 20px;
         }
-        
+        .actions{
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
         .head {
             flex-direction: column;
         }
-        
+    }
+    @media (max-width: 560px) {
         table {
             display: block;
             overflow-x: auto;
@@ -154,6 +159,21 @@ $utilisateurs = $stmt->fetch();
 </style>
 </head>
 <body>
+<script>
+    window.onbeforeunload = function() {
+        return "Voulez-vous vraiment quitter et vous déconnecter ?";
+    };
+
+    // Custom event handler for logout confirmation
+    function confirmLogout() {
+        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // Attach the confirmLogout function to the logout link
+    document.querySelector('.D').addEventListener('click', confirmLogout);
+</script>
     <div class="all">
     <h2>Bonjour <span class="welcome-message"><?= htmlspecialchars($utilisateurs['nom'] ?? 'Utilisateur') ?></span></h2>
 <table border="1">
@@ -170,8 +190,9 @@ $utilisateurs = $stmt->fetch();
 <td><?= $event['date_event'] ?></td>
 <td><?= $event['lieu'] ?></td>
 <td><?= $event['statut'] ?></td>
-<td>
+<td class="actions">
     <a class="R" href="supprimer_evenement.php?id=<?= $event['id'] ?>" onclick="return confirm('Voulez-vous vraiment supprimer cet événement ?');">Supprimer</a>
+    <a class="R" href="modifier_evenement.php?id=<?= $event['id'] ?>">Modifier</a>
 </td>
 </tr>
 <?php endforeach; ?>
@@ -180,6 +201,6 @@ $utilisateurs = $stmt->fetch();
 <a class="A" href="ajouter_evenement.php">Ajouter un événement</a>
 <a class="D" href="logout.php">Déconnexion</a>
 </div>
-    </div>
+</div>
 </body>
 </html>

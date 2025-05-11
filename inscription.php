@@ -59,7 +59,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* Section gauche */
+
 .sec1 {
     width: 50%;
     background-image: url(./imgs/first.png);

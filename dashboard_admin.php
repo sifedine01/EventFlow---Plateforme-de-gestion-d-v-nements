@@ -138,20 +138,41 @@ $evenements = $stmt->fetchAll();
         .all {
             padding: 30px 20px;
         }
-        
+        .actions{
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
         header {
             flex-direction: column;
             gap: 15px;
         }
-        
+    }
+    @media (max-width: 650px) {
         table {
             display: block;
             overflow-x: auto;
         }
     }
+    
 </style>
 </head>
 <body>
+<script>
+    window.onbeforeunload = function() {
+        return "Voulez-vous vraiment quitter et vous déconnecter ?";
+    };
+
+    // Custom event handler for logout confirmation
+    function confirmLogout() {
+        if (confirm("Voulez-vous vraiment vous déconnecter ?")) {
+            window.location.href = 'logout.php';
+        }
+    }
+
+    // Attach the confirmLogout function to the logout link
+    document.querySelector('.D').addEventListener('click', confirmLogout);
+</script>
 <div class="all">
      <header>
      <h1>Dashboard Admin</h1>
@@ -171,10 +192,10 @@ $evenements = $stmt->fetchAll();
         <td><?= $event['titre'] ?></td>
         <td><?= $event['nom'] ?></td>
         <td><?= $event['statut'] ?></td>
-        <td>
-         <a class="V" href="traiter_validation.php?id=<?= $event['id'] ?>&action=valide">Valider</a> |
+        <td class="actions">
+         <a class="V" href="traiter_validation.php?id=<?= $event['id'] ?>&action=valide">Valider</a>
          <a class="R" href="traiter_validation.php?id=<?= $event['id'] ?>&action=refuse">Refuser</a>
-         <?php if ($event['statut'] === 'refuse'): ?>|
+         <?php if ($event['statut'] === 'refuse'): ?>
          <a class="R" href="supprimer_evenement.php?id=<?= $event['id'] ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet événement ?');">Supprimer</a>
          <?php endif; ?>
         </td>
